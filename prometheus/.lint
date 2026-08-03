@@ -1,0 +1,96 @@
+---
+# Grafana Dashboard Linter configuration for prometheus/ dashboards.
+#
+# Install: https://github.com/grafana/dashboard-linter
+#
+# Usage:
+#   dashboard-linter lint dashboard.json                 # lint a single dashboard
+#   dashboard-linter lint dashboard.json --strict        # fail on warnings
+#   dashboard-linter lint dashboard.json --config .lint  # explicit config path
+#
+
+exclusions:
+  panel-title-description-rule:
+    reason: "Titles are self-explanatory for these dashboards and panels."
+    entries:
+    - dashboard: Node Exporter Full
+    - dashboard: HAProxy
+    - dashboard: Bind9 Full
+    - dashboard: NFS
+
+  target-instance-rule:
+    reason: "The dashboard uses instance= (exact match) or a different variable name for instance. It is valid PromQL for a single-instance dashboard."
+    entries:
+    - dashboard: Node Exporter Full
+    - dashboard: Node Exporter BSD
+    - dashboard: Unbound Full
+    - dashboard: Apache Full
+    - dashboard: HAProxy
+    - dashboard: Bind9 Full
+    - dashboard: NFS
+
+  target-job-rule:
+    reason: "The dashboard uses job= (exact match) in queries. It is valid PromQL for a single-job dashboard."
+    entries:
+    - dashboard: Node Exporter Full
+    - dashboard: Node Exporter BSD
+    - dashboard: Unbound Full
+    - dashboard: Apache Full
+    - dashboard: HAProxy
+    - dashboard: Bind9 Full
+    - dashboard: NFS
+
+  template-datasource-rule:
+    reason: "DS_PROMETHEUS / ds_prometheus are auto-assigned names from Grafana export/import. Renaming would break auto-datasource mapping."
+    entries:
+    - dashboard: Node Exporter Full
+    - dashboard: Node Exporter BSD
+    - dashboard: Unbound Full
+    - dashboard: Apache Full
+    - dashboard: HAProxy
+    - dashboard: Bind9 Full
+    - dashboard: NFS
+
+  template-instance-rule:
+    reason: "Dashboard uses custom instance variable naming or is single-instance by design."
+    entries:
+    - dashboard: Node Exporter Full
+    - dashboard: Node Exporter BSD
+    - dashboard: Unbound Full
+    - dashboard: Apache Full
+    - dashboard: HAProxy
+    - dashboard: Bind9 Full
+    - dashboard: NFS
+
+  template-job-rule:
+    reason: "Dashboard is designed as single-job. Multi-select, allValue, and datasource conventions are not applicable here."
+    entries:
+    - dashboard: Node Exporter Full
+    - dashboard: Node Exporter BSD
+    - dashboard: Unbound Full
+    - dashboard: Apache Full
+    - dashboard: HAProxy
+    - dashboard: Bind9 Full
+    - dashboard: NFS
+
+  template-on-time-change-reload-rule:
+    reason: "These label_values() queries are not time-dependent. Refreshing on dashboard load is correct and more efficient."
+    entries:
+    - dashboard: Node Exporter Full
+    - dashboard: Node Exporter BSD
+    - dashboard: HAProxy
+    - dashboard: Bind9 Full
+    - dashboard: NFS
+
+  uneditable-dashboard:
+    reason: "Users need to edit the dashboard after importing it. editable: false is only appropriate for provisioned/shared instances."
+    entries:
+    - dashboard: Node Exporter Full
+    - dashboard: Node Exporter BSD
+    - dashboard: Unbound Full
+    - dashboard: Apache Full
+    - dashboard: HAProxy
+    - dashboard: Bind9 Full
+    - dashboard: NFS
+
+warnings: {}
